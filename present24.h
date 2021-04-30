@@ -3,4 +3,4 @@
 #include <string.h>
 #include <unistd.h>
 
-void chiffrement(int message, int clee); //Fonction pour le chiffrement
+void chiffrement(unsigned int message, unsigned int clee); //Fonction pour le chiffrement

@@ -7,9 +7,8 @@ int main(int argc, char *argv[]){
 
     //____________________________CHIFFREMENT_____________________________________________________________________//
 
-    //printf("DONNÉES QUE NOUS POSSÉDONS POUR CHIFFRER : \n(message,clee) : (%d,%d)\n",argv[1],argv[2]);
-    
     unsigned int message = 000000; unsigned int clee = 000000;
+    printf("DONNÉES QUE NOUS POSSÉDONS POUR CHIFFRER : \n(message, clee) : (0x%X,0x%X)",message,clee);
     chiffrement(message,clee);
 
     
