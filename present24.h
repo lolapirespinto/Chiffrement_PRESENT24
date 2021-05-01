@@ -3,4 +3,5 @@
 #include <string.h>
 #include <unistd.h>
 
-void chiffrement(unsigned int message, unsigned int clee); //Fonction pour le chiffrement
+int hexa_to_dec(char *mot);
+void chiffrement(char *message, char *clee); //Fonction pour le chiffrement
