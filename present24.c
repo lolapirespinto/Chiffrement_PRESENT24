@@ -49,15 +49,19 @@ int permutation(int etat){
 }
 
 CLES cadencement(char *cle_maitre){
-    uint64_t partie_haute;
-    uint16_t partie_basse;
+    uint64_t partie_haute = 0;
+    uint64_t partie_basse;
     uint64_t temp=0;
     uint64_t temp_box=0;
     CLES cles;
-    partie_haute=hexa_to_dec(cle_maitre);
+    
+    partie_haute |= ((uint64_t)hexa_to_dec(cle_maitre)) << 40;
+    
     for(int i=0;i<11;i++){
+
         /*constitution de la clé avec les bits 39....16*/
         cles.K[i]=partie_haute & 0x0ffffff;
+
         /*on décale de 61 positions vers la gauche*/
         temp = partie_haute;
         temp = (temp << 61)|(temp >> (64 - 61));
@@ -71,13 +75,13 @@ CLES cadencement(char *cle_maitre){
         temp = temp >> 16;
         temp &= 0x00001fffffffffff;
         partie_haute |= temp;
-       
+        
         /*on sauvegarde dans temp les 4 bits les plus a gauche passés dans la sbox*/
         temp_box = sbox[(partie_haute >> 60) & 0x0f];
         
         /*on remplace dans la partie haute*/
         partie_haute = (partie_haute & 0x0fffffffffffffff) | ( temp_box << 60);
-
+       
         /*xor des bits 19 18 17 16 15 avec i*/
         partie_haute ^= ((uint64_t)(i+1) >> 1);
         partie_basse ^= ((uint16_t)(i+1) << 15);

@@ -8,6 +8,9 @@
 	./chiffrer "000000" "ffffff"
 	./chiffrer "f955b9" "d1bd2d"*/
 
+    //a obtenir
+    //bb57e6 739293 1b56ce 47a929
+
 
 int main(int argc, char *argv[]){
 
@@ -16,8 +19,7 @@ int main(int argc, char *argv[]){
     //printf("\n DONNÉES QUE NOUS POSSÉDONS POUR CHIFFRER : \n(message clair, clee) : (0x%s,0x%s)",argv[1],argv[2]);
 
     //int message_chiffre = chiffrement(argv[1],argv[2]);
-    //printf(" \n Le message chiffré obtenu est : %x",message_chiffre);
-    //12277734
+    //printf(" \n Le message chiffré obtenu est : %x \n",message_chiffre);
 
     /*____________________________DECHIFFREMENT_____________________________________________________________________*/
 
