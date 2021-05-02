@@ -11,7 +11,7 @@ typedef struct cles{
 /*___________FONCTIONS POUR LE CHIFFREMENT___________________*/
 int permutation(int etat); //Fonction pour la permutation
 int substitution(int etat); //Fonction pour la substitution
-int chiffrement(char *message, CLES cles); //Fonction qui chiffre un message 
+int chiffrement(char *message, char *clee_maitre); //Fonction qui chiffre un message 
 CLES cadencement(char *cle_maitre);
 
 /*_______________FONCTIONS DE CONVERSION___________________*/

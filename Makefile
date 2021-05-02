@@ -4,12 +4,11 @@ CC = gcc
 run : clean chiffrer
 	./chiffrer "000000" "000000"
 
+chiffrer : main.o present24.o dechiffrement.o
+	$(CC) main.o present24.o dechiffrement.o -lm -O3 -o chiffrer
 
-chiffrer : main.o present24.o 
-	$(CC) main.o present24.o -lm -O3 -o chiffrer
 
-
-%.o : %.c present.h 
+%.o : %.c present.h dechiffrement.h
 	$(CC) -c $<  $( CFLAGS )
 
 valgrind : chiffrer

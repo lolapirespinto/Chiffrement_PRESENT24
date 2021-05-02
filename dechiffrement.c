@@ -1,5 +1,6 @@
 #include "dechiffrement.h"
 #include "present24.h"
+#include <math.h>
 
 static const int pbox_inverse[24] = {0,4,8,12,16,20,1,5,9,13,17,21,2,6,10,14,18,22,3,7,11,15,19,23};
 
@@ -38,12 +39,14 @@ int substitution_inverse(int etat){
     return etat;
 }
 
-/*nt dechiffrement(int message_chiffre, CLES K){
-    int etat = etat ^ K[10]; 
+int dechiffrement(char *message_chiffre, char *clee_maitre){
+    CLES cles = cadencement(clee_maitre);
+    int etat = hexa_to_dec(message_chiffre);
+    etat ^= cles.K[10]; 
     for(int i=1;i<=10;i++){ 
         permutation_inverse(etat);  
         substitution_inverse(etat); 
-        etat = etat ^ K[10-i]; 
+        etat ^= cles.K[10-i]; 
     }
     return etat;
-}*/
+}

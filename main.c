@@ -4,22 +4,27 @@
 #include <stdio.h>
 #include <string.h>
 
+/*./chiffrer "fffffff" "000000"
+	./chiffrer "000000" "ffffff"
+	./chiffrer "f955b9" "d1bd2d"*/
+
 
 int main(int argc, char *argv[]){
 
     /*____________________________CHIFFREMENT_____________________________________________________________________*/
 
-    printf("DONNÉES QUE NOUS POSSÉDONS POUR CHIFFRER : \n(message, clee) : (0x%s,0x%s)",argv[1],argv[2]);
+    //printf("\n DONNÉES QUE NOUS POSSÉDONS POUR CHIFFRER : \n(message clair, clee) : (0x%s,0x%s)",argv[1],argv[2]);
 
-    CLES cles = cadencement(argv[2]);
-    int message_chiffre = chiffrement(argv[1],cles);
-    printf(" \n Le message chiffré obtenu est : %x",message_chiffre);
-
+    //int message_chiffre = chiffrement(argv[1],argv[2]);
+    //printf(" \n Le message chiffré obtenu est : %x",message_chiffre);
+    //12277734
 
     /*____________________________DECHIFFREMENT_____________________________________________________________________*/
 
-    //int message_clair = dechiffrement(message_chiffre,cles);
-    ////printf(" \n Le message clair obtenu est : %x",message_chiffre);
+    printf("\n DONNÉES QUE NOUS POSSÉDONS POUR DECHIFFRER : \n(message chiffré, clee) : (0x%s,0x%s)",argv[1],argv[2]);
+
+    int message_clair = dechiffrement(argv[1],argv[2]);
+    printf(" \n Le message clair obtenu est : %x",message_clair);
 
     exit(0);
 }

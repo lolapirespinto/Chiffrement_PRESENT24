@@ -51,14 +51,13 @@ int permutation(int etat){
 CLES cadencement(char *cle_maitre){
     uint64_t partie_haute;
     uint16_t partie_basse;
-    uint64_t temp;
-    uint16_t temp_box;
+    uint64_t temp=0;
+    uint64_t temp_box=0;
     CLES cles;
     partie_haute=hexa_to_dec(cle_maitre);
     for(int i=0;i<11;i++){
         /*constitution de la clé avec les bits 39....16*/
-        cles.K[i]=partie_haute & 0x00000ffffff;
-
+        cles.K[i]=partie_haute & 0x0ffffff;
         /*on décale de 61 positions vers la gauche*/
         temp = partie_haute;
         temp = (temp << 61)|(temp >> (64 - 61));
@@ -72,30 +71,31 @@ CLES cadencement(char *cle_maitre){
         temp = temp >> 16;
         temp &= 0x00001fffffffffff;
         partie_haute |= temp;
-
+       
         /*on sauvegarde dans temp les 4 bits les plus a gauche passés dans la sbox*/
         temp_box = sbox[(partie_haute >> 60) & 0x0f];
-
+        
         /*on remplace dans la partie haute*/
-        partie_haute = (partie_haute & 0x0ffffffffffffff) | ( temp_box << 12);
+        partie_haute = (partie_haute & 0x0fffffffffffffff) | ( temp_box << 60);
 
         /*xor des bits 19 18 17 16 15 avec i*/
-        partie_haute = partie_haute ^ ((uint64_t)i >> 4);
-        partie_basse = partie_basse ^ ((uint16_t)i << 1);
+        partie_haute ^= ((uint64_t)(i+1) >> 1);
+        partie_basse ^= ((uint16_t)(i+1) << 15);
     }
     return cles;
 }
 
-int chiffrement(char *message, CLES cles){
+int chiffrement(char *message, char *clee_maitre){
+    CLES cles = cadencement(clee_maitre);
     int etat = hexa_to_dec(message);
     //int etat = 0;
     //int K[11] = {0,0,1,1,4194402,8388650,12582963,4194395,1612,8389252,4195157};
     for(int t=1; t<=10; t++){ 
-        etat = etat ^ cles.K[t-1]; 
+        etat ^= cles.K[t-1]; 
         etat = substitution(etat);
         etat = permutation(etat);
     }
-    etat = etat ^ cles.K[10]; 
+    etat ^= cles.K[10]; 
     return etat;
 }
 
