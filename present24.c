@@ -49,8 +49,8 @@ int permutation(int etat){
 }
 
 CLES cadencement(char *cle_maitre){
-    uint64_t partie_haute = 0;
-    uint64_t partie_basse;
+    uint64_t partie_haute =0;
+    uint64_t partie_basse=0;
     uint64_t temp=0;
     uint64_t temp_box=0;
     CLES cles;
@@ -89,9 +89,9 @@ CLES cadencement(char *cle_maitre){
     return cles;
 }
 
-int chiffrement(char *message, char *clee_maitre){
-    CLES cles = cadencement(clee_maitre);
-    int etat = hexa_to_dec(message);
+int chiffrement(int etat, CLES cles){
+    //CLES cles = cadencement(clee_maitre);
+    //int etat = hexa_to_dec(message);
     //int etat = 0;
     //int K[11] = {0,0,1,1,4194402,8388650,12582963,4194395,1612,8389252,4195157};
     for(int t=1; t<=10; t++){ 

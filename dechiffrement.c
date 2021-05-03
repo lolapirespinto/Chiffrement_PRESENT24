@@ -1,11 +1,11 @@
 #include "dechiffrement.h"
-#include "present24.h"
 #include <math.h>
 
 static const int pbox_inverse[24] = {0,4,8,12,16,20,1,5,9,13,17,21,2,6,10,14,18,22,3,7,11,15,19,23};
 
 static const int sbox_inverse[16] = {0x05, 0x0e, 0x0f, 0x08, 0x0c, 0x01, 0x02, 0x0d, 0x0b, 0x04, 0x06, 0x03, 0x00, 0x07, 0x09, 0x0a};
 
+// 0000 1010 1111 0000 1111 1010
 int permutation_inverse(int etat){
     int tmp, tmp2, decalage; 
     tmp = etat & 1; 
@@ -39,13 +39,11 @@ int substitution_inverse(int etat){
     return etat;
 }
 
-int dechiffrement(char *message_chiffre, char *clee_maitre){
-    CLES cles = cadencement(clee_maitre);
-    int etat = hexa_to_dec(message_chiffre);
+int dechiffrement(int etat, CLES cles){
     etat ^= cles.K[10]; 
     for(int i=1;i<=10;i++){ 
-        permutation_inverse(etat);  
-        substitution_inverse(etat); 
+        etat = permutation_inverse(etat);  
+        etat = substitution_inverse(etat); 
         etat ^= cles.K[10-i]; 
     }
     return etat;
