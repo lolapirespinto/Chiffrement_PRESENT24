@@ -9,7 +9,7 @@ typedef struct cles{
 }CLES;
 
 /*___________FONCTIONS POUR LE CHIFFREMENT___________________*/
-CLES cadencement(char *cle_maitre); //Fonction pour obtenir les 11 sous-clés à partir de la clée maître
+CLES cadencement(int cle_maitre); //Fonction pour obtenir les 11 sous-clés à partir de la clée maître
 int permutation(int etat); //Fonction pour la permutation
 int substitution(int etat); //Fonction pour la substitution
 int chiffrement(int etat, CLES cles); //Fonction qui chiffre un message 

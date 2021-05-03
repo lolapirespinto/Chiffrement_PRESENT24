@@ -2,13 +2,13 @@ CFLAGS = -Wall -g
 CC = gcc
 
 run : clean chiffrer
-	./chiffrer "47a929" "d1bd2d"
+	./chiffrer "094f4b8" "0bbd3cb" 
 
-chiffrer : main.o present24.o dechiffrement.o
-	$(CC) main.o present24.o dechiffrement.o -lm -O3 -o chiffrer
+chiffrer : main.o present24.o dechiffrement.o attaque.o
+	$(CC) main.o present24.o dechiffrement.o attaque.o -lm -O3 -o chiffrer
 
 
-%.o : %.c present.h dechiffrement.h
+%.o : %.c present.h dechiffrement.h attaque.h
 	$(CC) -c $<  $( CFLAGS )
 
 valgrind : chiffrer

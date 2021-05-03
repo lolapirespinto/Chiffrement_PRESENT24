@@ -48,14 +48,14 @@ int permutation(int etat){
     return etat;
 }
 
-CLES cadencement(char *cle_maitre){
+CLES cadencement(int cle_maitre){
     uint64_t partie_haute =0;
     uint64_t partie_basse=0;
     uint64_t temp=0;
     uint64_t temp_box=0;
     CLES cles;
     
-    partie_haute |= ((uint64_t)hexa_to_dec(cle_maitre)) << 40;
+    partie_haute |= ((uint64_t)cle_maitre) << 40;
     
     for(int i=0;i<11;i++){
 
