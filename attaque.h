@@ -9,10 +9,9 @@ LOLA
 unsigned long long *Liste_LC;
 unsigned long long *Liste_LM;
 
-void remplir_liste_M(int message, unsigned long long int *Liste_LM);
-void remplir_liste_C(int message, unsigned long long int *Liste_LC);
-void quicksort(unsigned long long *number,int first,int last);
+void remplir_liste_M(int message, unsigned long long int *Liste_LM); //Fonction qui remplit la liste LM
+void remplir_liste_C(int message, unsigned long long int *Liste_LC); //Fonction qui remplit la liste LC
+void quicksort(unsigned long long *number,int first,int last); //Fonction pour le tri rapide
 void comparaison_tableau(unsigned long long int *tab1, unsigned long long int *tab2, int m1, int c1, int m2, int c2);
-int double_chiffrement(int message, int clee1, int clee2);
-void attaque(unsigned int m1, unsigned int c1, unsigned int m2, unsigned int c2);
-void compare_tab(int *tab1, int *tab2,int *liste_indices,int taille);
+int double_chiffrement(int message, int clee1, int clee2); //Fonction qui double chiffre un message clair avec deux cles k1 et k2
+void attaque(unsigned int m1, unsigned int c1, unsigned int m2, unsigned int c2); //Fonction globale de l'attaque par le milieu

@@ -6,6 +6,7 @@ static const int sbox[16] = {0x0c, 0x05, 0x06, 0x0b, 0x09, 0x00, 0x0a, 0x0d, 0x0
 
 static const int pbox[24] = {0,6,12,18,1,7,13,19,2,8,14,20,3,9,15,21,4,10,16,22,5,11,17,23};
 
+//Fonction qui convertit un hexadécimale en décimale
 unsigned int hexa_to_dec(char *mot){
     int x=0;
     for(int i=strlen(mot)-1;i>=0;i--){
@@ -17,7 +18,7 @@ unsigned int hexa_to_dec(char *mot){
 
 unsigned int substitution(unsigned int etat){
     int tmp,tmp2;
-    tmp = sbox[etat & 15];
+    tmp = sbox[etat & 15]; 
     tmp2 = (sbox[(etat >> 4) & 15]) << 4; 
     tmp = tmp | tmp2; 
     tmp2 = (sbox[(etat >> 8) & 15]) << 8; 
@@ -90,10 +91,6 @@ CLES cadencement(unsigned int cle_maitre){
 }
 
 unsigned int chiffrement(unsigned int etat, CLES cles){
-    //CLES cles = cadencement(clee_maitre);
-    //int etat = hexa_to_dec(message);
-    //int etat = 0;
-    //int K[11] = {0,0,1,1,4194402,8388650,12582963,4194395,1612,8389252,4195157};
     for(int t=1; t<=10; t++){ 
         etat ^= cles.K[t-1]; 
         etat = substitution(etat);
