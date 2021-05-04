@@ -9,14 +9,10 @@
 	./chiffrer "000000" "ffffff"
 	./chiffrer "f955b9" "d1bd2d"*/
 
-    //a obtenir
-    //bb57e6 739293 1b56ce 47a929
 
 
 int main(int argc, char *argv[]){
 
-    float temps;
-    clock_t t1, t2;
 
     /*____________________________CHIFFREMENT_____________________________________________________________________*/
 
@@ -39,25 +35,10 @@ int main(int argc, char *argv[]){
 
 
     /*____________________________ATTAQUE_____________________________________________________________________*/
-    t1 = clock();
-    printf("\n DONNÉES QUE NOUS POSSÉDONS POUR ATTAQUE : \n(message clair, message chiffré) : (0x%s,0x%s)",argv[1],argv[2]);
-    int message_clair = hexa_to_dec(argv[1]);
-    int message_chiffré = hexa_to_dec(argv[2]);
+    //printf("\n DONNÉES QUE NOUS POSSÉDONS POUR ATTAQUE : \n(message clair, message chiffré) : (0x%s,0x%s)",argv[1],argv[2]);
+    int m1 = 0x94f4b8; int c1 = 0xbbd3cb;
+    attaque(m1,c1);
 
-    int *Liste_LC = malloc(16777216*sizeof(int));
-    int *Liste_LM = malloc(16777216*sizeof(int));
-
-    Liste_LM = remplir_liste_M(message_clair,Liste_LM);
-    Liste_LC  = remplir_liste_C(message_chiffré,Liste_LC);
-
-    tri_rapide(Liste_LM, 16777216);
-    tri_rapide(Liste_LC, 16777216);
-
-    comparaison_tableau(Liste_LM, Liste_LC,message_clair,message_chiffré);
-
-    t2 = clock();
-    temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-    printf("temps pour remplir les listes = %f\n", temps);
 
     exit(0);
 }

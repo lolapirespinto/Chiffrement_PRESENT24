@@ -1,8 +1,13 @@
 #include "attaque.h"
 #include "dechiffrement.h"
 #include <stdint.h>
+#include <time.h>
 
 //5841527,5855507
+
+float temps;
+    clock_t t1, t2;
+
 
 void tri_rapide (int *tableau, int taille){
     int mur, courant, pivot, tmp;
@@ -40,27 +45,48 @@ void comparaison_tableau(int *tab1, int *tab2, int message_clair, int message_ch
     }
 }
 
-int double_chiffrement(int message, int clee1, int clee2){
-    CLES cles1 = cadencement(clee1);
-    CLES cles2 = cadencement(clee2);
+int double_chiffrement(int message, int cle1, int cle2){
+    CLES cles1 = cadencement(cle1);
+    CLES cles2 = cadencement(cle2);
     int chiffre = chiffrement((chiffrement(message,cles1)),cles2);
     return chiffre;
 }
 
-int *remplir_liste_M(unsigned int message, int *Liste_LM){
+void remplir_liste_M(int message, int *Liste_LM){
     for(int i=0; i<16777216; i++){
         CLES K = cadencement(i); 
-        int res = (chiffrement(message,K) << 24) | i;
-        Liste_LM[i]=res; //On stocke le résultat du chiffrement du message clair avec la clee ki
+        Liste_LM[i] = chiffrement(message,K);
+        Liste_LM[i] = Liste_LM[i] << 24 | i;
     }
-    return Liste_LM;
 }
 
-int *remplir_liste_C(unsigned int message, int *Liste_LC){
+void remplir_liste_C(int message, int *Liste_LC){
     for(int i=0; i<16777216; i++){
         CLES K = cadencement(i); 
-        int res = (dechiffrement(message,K) << 24) | i;
-        Liste_LC[i]=res; //On stocke le résultat du chiffrement du message clair avec la clee ki
+        Liste_LC[i] = dechiffrement(message,K); 
+        Liste_LC[i] = (Liste_LC[i] << 24) | i; //On stocke le résultat du chiffrement du message clair avec la clee ki
     }
-    return Liste_LC;
+}
+
+void attaque(int message_clair, int message_chiffre){
+    t1 = clock();
+    int *Liste_LC = malloc(16777216*sizeof(unsigned long));
+    int *Liste_LM = malloc(16777216*sizeof(unsigned long));
+
+    remplir_liste_M(message_clair,Liste_LM);
+    remplir_liste_C(message_chiffre,Liste_LC);
+
+    tri_rapide(Liste_LM, 16777216);
+    tri_rapide(Liste_LC, 16777216);
+
+    /*comparaison_tableau(Liste_LM, Liste_LC,message_clair,message_chiffre);*/
+
+
+
+
+
+
+    t2 = clock();
+    temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+    printf("temps pour remplir les listes = %f\n", temps);
 }
