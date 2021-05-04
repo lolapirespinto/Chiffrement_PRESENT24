@@ -5,13 +5,9 @@
 #include "attaque.h"
 #include <time.h>
 
-/*./chiffrer "fffffff" "000000"
-	./chiffrer "000000" "ffffff"
-	./chiffrer "f955b9" "d1bd2d"*/
-
-
 
 int main(int argc, char *argv[]){
+
 
 
     /*____________________________CHIFFREMENT_____________________________________________________________________*/
@@ -36,8 +32,9 @@ int main(int argc, char *argv[]){
 
     /*____________________________ATTAQUE_____________________________________________________________________*/
     //printf("\n DONNÉES QUE NOUS POSSÉDONS POUR ATTAQUE : \n(message clair, message chiffré) : (0x%s,0x%s)",argv[1],argv[2]);
-    int m1 = 0x94f4b8; int c1 = 0xbbd3cb;
-    attaque(m1,c1);
+    int m1 = 0x94f4b8; int c1 = 0xbbd3cb; 
+    int m2 = 0x111ef1; int c2 = 0x8773b3;
+    attaque(m1,c1,m2,c2);
 
 
     exit(0);
