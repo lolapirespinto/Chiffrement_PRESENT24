@@ -1,12 +1,11 @@
 #include "dechiffrement.h"
 #include <math.h>
 
-static const int pbox_inverse[24] = {0,4,8,12,16,20,1,5,9,13,17,21,2,6,10,14,18,22,3,7,11,15,19,23};
+static const unsigned int pbox_inverse[24] = {0,4,8,12,16,20,1,5,9,13,17,21,2,6,10,14,18,22,3,7,11,15,19,23};
 
-static const int sbox_inverse[16] = {0x05, 0x0e, 0x0f, 0x08, 0x0c, 0x01, 0x02, 0x0d, 0x0b, 0x04, 0x06, 0x03, 0x00, 0x07, 0x09, 0x0a};
+static const unsigned int sbox_inverse[16] = {0x05, 0x0e, 0x0f, 0x08, 0x0c, 0x01, 0x02, 0x0d, 0x0b, 0x04, 0x06, 0x03, 0x00, 0x07, 0x09, 0x0a};
 
-// 0000 1010 1111 0000 1111 1010
-int permutation_inverse(int etat){
+unsigned int permutation_inverse(unsigned int etat){
     int tmp, tmp2, decalage; 
     tmp = etat & 1; 
     for(int i=1; i<24; i++){ 
@@ -22,7 +21,7 @@ int permutation_inverse(int etat){
     return etat;
 }
 
-int substitution_inverse(int etat){
+unsigned int substitution_inverse(unsigned int etat){
     int tmp,tmp2;
     tmp = sbox_inverse[etat & 15];
     tmp2 = (sbox_inverse[(etat >> 4) & 15]) << 4; 
@@ -39,7 +38,7 @@ int substitution_inverse(int etat){
     return etat;
 }
 
-int dechiffrement(int etat, CLES cles){
+unsigned int dechiffrement(unsigned int etat, CLES cles){
     etat ^= cles.K[10]; 
     for(int i=1;i<=10;i++){ 
         etat = permutation_inverse(etat);  

@@ -9,10 +9,10 @@ typedef struct cles{
 }CLES;
 
 /*___________FONCTIONS POUR LE CHIFFREMENT___________________*/
-CLES cadencement(int cle_maitre); //Fonction pour obtenir les 11 sous-clés à partir de la clée maître
-int permutation(int etat); //Fonction pour la permutation
-int substitution(int etat); //Fonction pour la substitution
-int chiffrement(int etat, CLES cles); //Fonction qui chiffre un message 
+CLES cadencement(unsigned int cle_maitre); //Fonction pour obtenir les 11 sous-clés à partir de la clée maître
+unsigned int permutation(unsigned int etat); //Fonction pour la permutation
+unsigned int substitution(unsigned int etat); //Fonction pour la substitution
+unsigned int chiffrement(unsigned int etat, CLES cles); //Fonction qui chiffre un message 
 
 /*_______________FONCTIONS DE CONVERSION___________________*/
-int hexa_to_dec(char *mot); //Fonction pour convertir un héxa en décimale
+unsigned int hexa_to_dec(char *mot); //Fonction pour convertir un héxa en décimale

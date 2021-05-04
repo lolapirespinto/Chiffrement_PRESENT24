@@ -3,6 +3,6 @@
 # include  <string.h>
 #include "present24.h"
 
-int permutation_inverse(int etat); //Fonction pour la permutation inverse
-int substitution_inverse(int etat); //Fonction pour la substitution inverse
-int dechiffrement(int etat, CLES cles); //Fonction pour déchiffrement un message chiffré
+unsigned int permutation_inverse(unsigned int etat); //Fonction pour la permutation inverse
+unsigned int substitution_inverse(unsigned int etat); //Fonction pour la substitution inverse
+unsigned int dechiffrement(unsigned int etat, CLES cles); //Fonction pour déchiffrement un message chiffré

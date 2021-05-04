@@ -6,7 +6,7 @@ static const int sbox[16] = {0x0c, 0x05, 0x06, 0x0b, 0x09, 0x00, 0x0a, 0x0d, 0x0
 
 static const int pbox[24] = {0,6,12,18,1,7,13,19,2,8,14,20,3,9,15,21,4,10,16,22,5,11,17,23};
 
-int hexa_to_dec(char *mot){
+unsigned int hexa_to_dec(char *mot){
     int x=0;
     for(int i=strlen(mot)-1;i>=0;i--){
         if (mot[i]>='0' && mot[i]<='9'){x=x+((mot[i]-48)*pow(16,strlen(mot)-1-i));}
@@ -15,7 +15,7 @@ int hexa_to_dec(char *mot){
     return x;
 }
 
-int substitution(int etat){
+unsigned int substitution(unsigned int etat){
     int tmp,tmp2;
     tmp = sbox[etat & 15];
     tmp2 = (sbox[(etat >> 4) & 15]) << 4; 
@@ -32,7 +32,7 @@ int substitution(int etat){
     return etat;
 }
 
-int permutation(int etat){
+unsigned int permutation(unsigned int etat){
     int tmp, tmp2, decalage; 
     tmp = etat & 1; 
     for(int i=1; i<24; i++){ 
@@ -48,7 +48,7 @@ int permutation(int etat){
     return etat;
 }
 
-CLES cadencement(int cle_maitre){
+CLES cadencement(unsigned int cle_maitre){
     uint64_t partie_haute =0;
     uint64_t partie_basse=0;
     uint64_t temp=0;
@@ -89,7 +89,7 @@ CLES cadencement(int cle_maitre){
     return cles;
 }
 
-int chiffrement(int etat, CLES cles){
+unsigned int chiffrement(unsigned int etat, CLES cles){
     //CLES cles = cadencement(clee_maitre);
     //int etat = hexa_to_dec(message);
     //int etat = 0;
