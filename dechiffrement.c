@@ -40,7 +40,7 @@ unsigned int substitution_inverse(unsigned int etat){
     return etat;
 }
 
-//Algorithme de dechiffrement
+//Algorithme de déchiffrement
 unsigned int dechiffrement(unsigned int etat, CLES cles){
     etat ^= cles.K[10]; 
     for(int i=1;i<=10;i++){ 
