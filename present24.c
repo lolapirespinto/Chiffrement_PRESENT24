@@ -16,10 +16,11 @@ unsigned int hexa_to_dec(char *mot){
     return x;
 }
 
+//Fonction pour la subsitution
 unsigned int substitution(unsigned int etat){
     int tmp,tmp2;
-    tmp = sbox[etat & 15]; 
-    tmp2 = (sbox[(etat >> 4) & 15]) << 4; 
+    tmp = sbox[etat & 15]; //on substitue les 4 premiers bits
+    tmp2 = (sbox[(etat >> 4) & 15]) << 4; //on substitue les 4 suivants
     tmp = tmp | tmp2; 
     tmp2 = (sbox[(etat >> 8) & 15]) << 8; 
     tmp = tmp | tmp2;
@@ -33,22 +34,24 @@ unsigned int substitution(unsigned int etat){
     return etat;
 }
 
+//Fonction pour la permutation
 unsigned int permutation(unsigned int etat){
     int tmp, tmp2, decalage; 
-    tmp = etat & 1; 
-    for(int i=1; i<24; i++){ 
+    tmp = etat & 1; //le bit 0 permute toujours en 0, on garde alors toujours le dernier bit bO
+    for(int i=1; i<24; i++){  //on itére ensuite sur les bits de b1 à b23
         double p = pow(2,i);
         int res = (int) p;  
-        tmp2 = etat & res; 
-        decalage = i - pbox[i]; 
-        if(decalage > 0) tmp2 = tmp2 >> decalage; 
-        if(decalage < 0) tmp2 = tmp2 << -(decalage); 
-        tmp = tmp | tmp2; 
+        tmp2 = etat & res; //pour isoler le bit qu'on souhaite traiter
+        decalage = i - pbox[i]; //on calcule le décalage entre le bit qu'on traite et sa permutation
+        if(decalage > 0) tmp2 = tmp2 >> decalage; //si ce décalage est positif on décale vers la droite
+        if(decalage < 0) tmp2 = tmp2 << -(decalage); // si ce décalage est négatif on décale vers la gauche
+        tmp = tmp | tmp2; //on ajoute le résultat à tmp 
     }
     etat = tmp;
     return etat;
 }
 
+//Fonction pour cadencer la clé maître en 11 sous-clés
 CLES cadencement(unsigned int cle_maitre){
     uint64_t partie_haute =0;
     uint64_t partie_basse=0;
@@ -90,6 +93,7 @@ CLES cadencement(unsigned int cle_maitre){
     return cles;
 }
 
+//Algorithme de chiffrement
 unsigned int chiffrement(unsigned int etat, CLES cles){
     for(int t=1; t<=10; t++){ 
         etat ^= cles.K[t-1]; 

@@ -31,9 +31,9 @@ int main(int argc, char *argv[]){
 
 
     /*____________________________ATTAQUE_____________________________________________________________________*/
-    //printf("\n DONNÉES QUE NOUS POSSÉDONS POUR ATTAQUE : \n(message clair, message chiffré) : (0x%s,0x%s)",argv[1],argv[2]);
     unsigned int m1 = 0x94f4b8; unsigned int c1 = 0xbbd3cb; 
     unsigned int m2 = 0x111ef1; unsigned int c2 = 0x8773b3;
+    printf("\n DONNÉES QUE NOUS POSSÉDONS POUR ATTAQUE : (m1,c1) : (0x%x,0x%x), (m2,c2) : (0x%x,0x%x) ",m1,c1,m2,c2);
     attaque(m1,c1,m2,c2);
 
 

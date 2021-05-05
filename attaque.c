@@ -10,32 +10,32 @@ float temps;
 
 
 //Fonction tri_rapide qui trie les élémenents d'une liste dans l'ordre croissant
-void quicksort(unsigned long long *number,int first,int last){
+void quicksort(unsigned long long *tab, int premier, int dernier){
    int i, j, pivot;
    unsigned long long temp;
 
-   if(first<last){
-      pivot=first;
-      i=first;
-      j=last;
+   if(premier < dernier){
+      pivot = premier;
+      i = premier;
+      j = dernier;
 
-      while(i<j){
-         while((number[i]>>24 & 0xffffff) <= (number[pivot]>>24 & 0xffffff) && i<last)
+      while( i < j){
+         while((tab[i]>>24 & 0xffffff) <= (tab[pivot]>>24 & 0xffffff) && i<dernier) //on garde seulement le message pour chaque tab[i] (on enlève la concaténation avec la cle ki)
             i++;
-         while((number[j]>>24 & 0xffffff) > (number[pivot]>>24 & 0xffffff))
+         while((tab[j]>>24 & 0xffffff) > (tab[pivot]>>24 & 0xffffff))
             j--;
          if(i<j){
-            temp=number[i];
-            number[i]=number[j];
-            number[j]=temp;
+            temp = tab[i];
+            tab[i] = tab[j];
+            tab[j] = temp;
          }
       }
 
-      temp=number[pivot];
-      number[pivot]=number[j];
-      number[j]=temp;
-      quicksort(number,first,j-1);
-      quicksort(number,j+1,last);
+      temp = tab[pivot];
+      tab[pivot] = tab[j];
+      tab[j] = temp;
+      quicksort(tab,premier,j-1);
+      quicksort(tab,j+1,dernier);
 
    }
 }
@@ -68,9 +68,9 @@ void comparaison_tableau(unsigned long long *tab1, unsigned long long int *tab2,
     
 //Fonction qui double chiffre un message clair avec deux cles k1 et k2
 int double_chiffrement(int message, int cle1, int cle2){
-    CLES cles1 = cadencement(cle1);
-    CLES cles2 = cadencement(cle2);
-    int chiffre = chiffrement((chiffrement(message,cles1)),cles2);
+    CLES cles1 = cadencement(cle1); //cadencement de la clé maitre k1
+    CLES cles2 = cadencement(cle2); //cadencement de la clé maitre k2
+    int chiffre = chiffrement((chiffrement(message,cles1)),cles2); //double chiffrement du message avec k1 et k2
     return chiffre;
 }
 
@@ -83,6 +83,7 @@ void remplir_liste_M(int message, unsigned long long *Liste_LM){
     }
 }
 
+//Fonction qui remplit la liste LC
 void remplir_liste_C(int message, unsigned long long *Liste_LC){
     for(unsigned int i=0; i<TAILLE; i++){
         CLES K = cadencement(i); //cadencement de la cle maitre i 
@@ -91,6 +92,7 @@ void remplir_liste_C(int message, unsigned long long *Liste_LC){
     }
 }
 
+//Fonction globale de l'attaque par le milieu
 void attaque(unsigned int m1, unsigned int c1, unsigned int m2, unsigned int c2){
     
     t1 = clock();
