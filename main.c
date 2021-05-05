@@ -36,6 +36,5 @@ int main(int argc, char *argv[]){
     printf("\n DONNÉES QUE NOUS POSSÉDONS POUR ATTAQUE : (m1,c1) : (0x%x,0x%x), (m2,c2) : (0x%x,0x%x) ",m1,c1,m2,c2);
     attaque(m1,c1,m2,c2);
 
-
     exit(0);
 }

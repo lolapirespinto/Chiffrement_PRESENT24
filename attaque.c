@@ -105,7 +105,7 @@ void attaque(unsigned int m1, unsigned int c1, unsigned int m2, unsigned int c2)
     quicksort(Liste_LC,0,TAILLE-1); //tri rapide sur la liste LC
     quicksort(Liste_LM,0,TAILLE-1); //tri rapidfe sur la liste LM
   
-    comparaison_tableau(Liste_LM,Liste_LC,m1,c1,m2,c2); //cherche les cles dans les deux listes
+    comparaison_tableau(Liste_LM,Liste_LC,m1,c1,m2,c2); //cherche les clés dans les deux listes
 
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
